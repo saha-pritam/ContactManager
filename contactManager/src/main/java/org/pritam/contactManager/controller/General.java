@@ -9,4 +9,9 @@ public class General {
 	public String welcome() {
 		return "home";
 	}
+	
+	@GetMapping("/getRegistered")
+	public String getRegistered() {
+		return "registrationPage";
+	}
 }
