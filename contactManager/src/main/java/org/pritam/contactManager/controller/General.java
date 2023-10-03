@@ -14,7 +14,10 @@ public class General {
 	@Autowired
 	private UserService userService;
 	@GetMapping("/")
-	public String welcome() {
+	public String welcome(Model model) {
+		model.addAttribute("message1", "Smart Contact Manager");
+		model.addAttribute("message2", "Start Collecting Your Contacts In Very Smarter Way.");
+		model.addAttribute("message3", "We Provide Very Efficient And Smarter Way Of Handling Contacts.");
 		return "home";
 	}
 	
@@ -26,7 +29,7 @@ public class General {
 	}
 	
 	@PostMapping("/getRegistered")
-	public String getRegistered(@ModelAttribute("user") User user,Model model) throws InterruptedException {
+	public String getRegistered(@ModelAttribute("user") User user,Model model){
 		if(userService.isEmailExists(user.getEmail())) {
 			model.addAttribute("duplicateEmail", true);
 			return "registrationPage";
@@ -36,7 +39,9 @@ public class General {
 		if(user.getDescription()!=null && user.getDescription().length()==0)
 			user.setDescription(null);
 		userService.saveUser(user);
-		Thread.sleep(4000);
-		return "redirect:/";
+		model.addAttribute("message1", "Hey User, Welcome To Smart Contact Manager");
+		model.addAttribute("message2", "Your Account Has Been Successfully Created.");
+		model.addAttribute("message3", "You Can Now Login And Start Collecting Your Contacts In Very Smarter Way.");
+		return "home";
 	}
 }
