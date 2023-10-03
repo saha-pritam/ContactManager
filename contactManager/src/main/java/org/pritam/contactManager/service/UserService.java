@@ -16,4 +16,9 @@ public class UserService {
 	public User saveUser(User user) {
 		return userRepository.save(user);
 	}
+	
+	@Transactional
+	public boolean isEmailExists(String email) {
+		return userRepository.findByEmail(email).isPresent();
+	}
 }
