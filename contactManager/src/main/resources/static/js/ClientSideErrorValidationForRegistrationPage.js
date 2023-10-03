@@ -15,6 +15,7 @@ $(document).ready(function() {
 
 	$("#email").on('click', function(e) {
 		$("#clientSideErrorForEmail").hide();
+		$("#serverSideErrorForEmail").hide();
 	})
 
 	$("#password").on('click', function(e) {
