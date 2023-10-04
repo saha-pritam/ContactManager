@@ -21,6 +21,11 @@ public class General {
 		return "home";
 	}
 	
+	@GetMapping("/about")
+	public String about() {
+		return "about";
+	}
+	
 	@GetMapping("/getRegistered")
 	public String getRegistered(Model model) {
 		User user = new User();
