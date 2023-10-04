@@ -26,6 +26,11 @@ public class General {
 		return "about";
 	}
 	
+	@GetMapping("/gallery")
+	public String gallery() {
+		return "gallery";
+	}
+	
 	@GetMapping("/getRegistered")
 	public String getRegistered(Model model) {
 		User user = new User();
