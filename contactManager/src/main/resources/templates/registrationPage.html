@@ -5,6 +5,7 @@
    </head>
    <body>
       <section>
+         <link th:href="@{/css/tooltip.css}" rel="stylesheet">
          <script src="https://code.jquery.com/jquery-3.7.1.min.js"
             integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
          <script type="text/javascript" th:src="@{/js/ClientSideErrorValidationForRegistrationPage.js}"></script>
@@ -14,7 +15,15 @@
                   <h2 class="text-2xl font-medium leading-7 text-gray-900 text-center">Register With Email</h2>
                   <div class="mt-5 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                      <div class="sm:col-span-3">
-                        <label class="block text-sm font-medium leading-6 text-gray-900">First name</label>
+                        <div class="flex justify-between">
+                           <div>
+                              <label class="text-sm font-medium leading-6 text-gray-900">*First name</label> 
+                           </div>
+                           <div class="custom-tooltip-1">
+                              <img th:src="@{/images/tooltip.png}">
+                              <span class="custom-tooltiptext-1 ms-2 text-xs">Should contain only alphabetical characters.</span>
+                           </div>
+                        </div>
                         <div class="mt-2">
                            <input type="text" name="firstName" id="firstName" autocomplete="given-name"
                               class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -23,7 +32,15 @@
                         <div class="mt-2 block text-sm font-medium leading-6 text-red-500" id="clientSideErrorForFirstName"></div>
                      </div>
                      <div class="sm:col-span-3">
-                        <label class="block text-sm font-medium leading-6 text-gray-900">Last name</label>
+                        <div class="flex justify-between">
+                           <div>
+                              <label class="text-sm font-medium leading-6 text-gray-900">*Last name</label> 
+                           </div>
+                           <div class="custom-tooltip-1">
+                              <img th:src="@{/images/tooltip.png}">
+                              <span class="custom-tooltiptext-1 ms-2 text-xs">Should contain only alphabetical characters.</span>
+                           </div>
+                        </div>
                         <div class="mt-2">
                            <input type="text" name="lastName" id="lastName" autocomplete="family-name"
                               class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -32,7 +49,7 @@
                         <div class="mt-2 block text-sm font-medium leading-6 text-red-500" id="clientSideErrorForLastName"></div>
                      </div>
                      <div class="sm:col-span-3">
-                        <label class="block text-sm font-medium leading-6 text-gray-900">Email</label>
+                        <label class="block text-sm font-medium leading-6 text-gray-900">*Email</label>
                         <div class="mt-2">
                            <input type="text" name="email" id="email" autocomplete="family-name"
                               class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -43,7 +60,15 @@
                            th:style="${duplicateEmail}?'display:block':'display:none'">Email is already taken</div>
                      </div>
                      <div class="sm:col-span-3">
-                        <label class="block text-sm font-medium leading-6 text-gray-900">Password</label>
+                        <div class="flex justify-between">
+                           <div>
+                              <label class="text-sm font-medium leading-6 text-gray-900">*Password</label> 
+                           </div>
+                           <div class="custom-tooltip-2">
+                              <img th:src="@{/images/tooltip.png}">
+                              <span class="custom-tooltiptext-2 ms-2 text-xs">Should be between 8 to 15 characters with atleast one uppercase, lowercase, digit and special character.</span>
+                           </div>
+                        </div>
                         <div class="mt-2">
                            <input type="password" name="password" id="password" autocomplete="family-name"
                               class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
