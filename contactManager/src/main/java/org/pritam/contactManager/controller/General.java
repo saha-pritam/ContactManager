@@ -54,4 +54,9 @@ public class General {
 		model.addAttribute("message3", "You Can Now Login And Start Collecting Your Contacts In Very Smarter Way.");
 		return "home";
 	}
+	
+	@GetMapping("/signin")
+	public String signin() {
+		return "login";
+	}
 }
