@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="authenticatedBase::layout(~{::section})">
+   <head>
+      <meta charset="ISO-8859-1">
+   </head>
+   <body>
+      <section>
+         <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+         <script type="text/javascript" th:src="@{/js/createContact.js}"></script>
+         <link th:href="@{/css/createContact.css}" rel="stylesheet" />
+         <script>
+            $(document).ready(function(){
+              $('#createContactOption').css('border-bottom', '3px solid black');
+            });
+         </script>
+         <div class="w-1/2 mx-auto mt-10">
+            <form method="get" id="newContactform" enctype="multipart/form-data">
+				
+               <!--Image Preview-->
+               <div class="flex mt-3 justify-center">
+                  <div>
+                     <input type="file" id="file" accept="image/*" hidden>
+                     <div class="img-area" data-img="">
+                        <img th:src="@{/images/profile-picture-icon.png}"/>
+                     </div>
+                  </div>
+               </div>
+               
+               <!--Select Image Button-->
+               <div class="flex mt-3 mb-10 justify-center">
+                  <div>
+                     <button id="select-image" type="button" class="rounded-2xl px-3 py-2 text-sm font-bold text-white shadow-sm bg-gray-500">Select Image</button>
+                  </div>
+               </div>
+               
+               <!-- Name Prefix -->
+               <div class="flex mt-3 justify-center" id="namePrefixDiv">
+                  <div class="w-8">
+                     <img th:src="@{/images/user-icon.png}" />
+                  </div>
+                  <div class="w-4/5 px-2">
+                     <input type="text" id="namePrefix" name="namePrefix"
+                        class="block w-full rounded-2xl border-0 py-1.5 text-gray-500 font-bold text-sm shadow-sm ring-1 ring-inset ring-gray-300 placeholder:font-bold placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        placeholder="Name Prefix">
+                  </div>
+                  <div class="w-8">
+                     <img id="upIcon" th:src="@{/images/up-icon.png}" style="cursor: pointer;" />
+                  </div>
+               </div>
+               
+               <!-- First Name -->
+               <div class="flex mt-3 justify-center" id="firstNameDiv">
+                  <div class="w-8">
+                     <img id="userIcon" th:src="@{/images/user-icon.png}" />
+                  </div>
+                  <div class="w-4/5 px-2">
+                     <input type="text" id="firstName" name="firstName"
+                        class="block w-full rounded-2xl border-0 py-1.5 text-gray-500 font-bold text-sm shadow-sm ring-1 ring-inset ring-gray-300 placeholder:font-bold placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        placeholder="First Name">
+                  </div>
+                  <div class="w-8">
+                     <img id="downIcon" th:src="@{/images/down-icon.png}" style="cursor: pointer;" />
+                  </div>
+               </div>
+               
+               <!-- Middle Name -->
+               <div class="flex mt-3 justify-center" id="middleNameDiv">
+                  <div class="w-8"></div>
+                  <div class="w-4/5 px-2">
+                     <input type="text" id="middleName" name="middleName"
+                        class="block w-full rounded-2xl border-0 py-1.5 text-gray-500 font-bold text-sm shadow-sm ring-1 ring-inset ring-gray-300 placeholder:font-bold placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        placeholder="Middle Name">
+                  </div>
+                  <div class="w-8"></div>
+               </div>
+               
+               <!-- Surname -->
+               <div class="flex mt-3 justify-center" id="surnameDiv">
+                  <div class="w-8"></div>
+                  <div class="w-4/5 px-2">
+                     <input type="text" id="surname" name="surname"
+                        class="block w-full rounded-2xl border-0 py-1.5 text-gray-500 font-bold text-sm shadow-sm ring-1 ring-inset ring-gray-300 placeholder:font-bold placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        placeholder="Surname">
+                  </div>
+                  <div class="w-8"></div>
+               </div>
+               
+               <!-- Name Suffix -->
+               <div class="flex mt-3 justify-center" id="nameSuffixDiv">
+                  <div class="w-8"></div>
+                  <div class="w-4/5 px-2">
+                     <input type="text" id="nameSuffix" name="nameSuffix"
+                        class="block w-full rounded-2xl border-0 py-1.5 text-gray-500 font-bold text-sm shadow-sm ring-1 ring-inset ring-gray-300 placeholder:font-bold placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        placeholder="Name Suffix">
+                  </div>
+                  <div class="w-8"></div>
+               </div>
+               
+               <!-- Phonetic Surname -->
+               <div class="flex mt-3 justify-center" id="phoneticSurnameDiv">
+                  <div class="w-8"></div>
+                  <div class="w-4/5 px-2">
+                     <input type="text" id="phoneticSurname" name="phoneticSurname"
+                        class="block w-full rounded-2xl border-0 py-1.5 text-gray-500 font-bold text-sm shadow-sm ring-1 ring-inset ring-gray-300 placeholder:font-bold placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        placeholder="Phonetic Surname">
+                  </div>
+                  <div class="w-8"></div>
+               </div>
+               
+               <!-- Phonetic Middle Name -->
+               <div class="flex mt-3 justify-center" id="phoneticMiddleNameDiv">
+                  <div class="w-8"></div>
+                  <div class="w-4/5 px-2">
+                     <input type="text" id="phoneticMiddleName" name="phoneticMiddleName"
+                        class="block w-full rounded-2xl border-0 py-1.5 text-gray-500 font-bold text-sm shadow-sm ring-1 ring-inset ring-gray-300 placeholder:font-bold placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        placeholder="Phonetic Middle Name">
+                  </div>
+                  <div class="w-8"></div>
+               </div>
+               
+               <!-- Phonetic First Name -->
+               <div class="flex mt-3 justify-center" id="phoneticFirstNameDiv">
+                  <div class="w-8"></div>
+                  <div class="w-4/5 px-2">
+                     <input type="text" id="phoneticFirstName" name="phoneticFirstName"
+                        class="block w-full rounded-2xl border-0 py-1.5 text-gray-500 font-bold text-sm shadow-sm ring-1 ring-inset ring-gray-300 placeholder:font-bold placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        placeholder="Phonetic First Name">
+                  </div>
+                  <div class="w-8"></div>
+               </div>
+               
+               <!-- Nickname -->
+               <div class="flex mt-3 justify-center" id="nicknameDiv">
+                  <div class="w-8"></div>
+                  <div class="w-4/5 px-2">
+                     <input type="text" id="nickname" name="nickname"
+                        class="block w-full rounded-2xl border-0 py-1.5 text-gray-500 font-bold text-sm shadow-sm ring-1 ring-inset ring-gray-300 placeholder:font-bold placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        placeholder="Nickname">
+                  </div>
+                  <div class="w-8"></div>
+               </div>
+               
+               <!-- File As -->
+               <div class="flex mt-3 justify-center" id="fileAsDiv">
+                  <div class="w-8"></div>
+                  <div class="w-4/5 px-2">
+                     <input type="text" id="fileAs" name="fileAs"
+                        class="block w-full rounded-2xl border-0 py-1.5 text-gray-500 font-bold text-sm shadow-sm ring-1 ring-inset ring-gray-300 placeholder:font-bold placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        placeholder="File As">
+                  </div>
+                  <div class="w-8"></div>
+               </div>
+               
+               <!-- Company -->
+               <div class="flex mt-3 justify-center" id="companyDiv">
+                  <div class="w-8">
+                     <img th:src="@{/images/company-icon.png}" />
+                  </div>
+                  <div class="w-4/5 px-2">
+                     <input type="text" id="company" name="company"
+                        class="block w-full rounded-2xl border-0 py-1.5 text-gray-500 font-bold text-sm shadow-sm ring-1 ring-inset ring-gray-300 placeholder:font-bold placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        placeholder="Company">
+                  </div>
+                  <div class="w-8">
+                  </div>
+               </div>
+               
+               <!-- Department -->
+               <div class="flex mt-3 justify-center" id="departmentDiv">
+                  <div class="w-8"></div>
+                  <div class="w-4/5 px-2">
+                     <input type="text" id="department" name="department"
+                        class="block w-full rounded-2xl border-0 py-1.5 text-gray-500 font-bold text-sm shadow-sm ring-1 ring-inset ring-gray-300 placeholder:font-bold placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        placeholder="Department">
+                  </div>
+                  <div class="w-8"></div>
+               </div>
+               
+               <!-- Title -->
+               <div class="flex mt-3 justify-center" id="titleDiv">
+                  <div class="w-8"></div>
+                  <div class="w-4/5 px-2">
+                     <input type="text" id="title" name="title"
+                        class="block w-full rounded-2xl border-0 py-1.5 text-gray-500 font-bold text-sm shadow-sm ring-1 ring-inset ring-gray-300 placeholder:font-bold placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        placeholder="Title">
+                  </div>
+                  <div class="w-8"></div>
+               </div>
+               
+               <!-- Phone -->
+               <div class="flex mt-3 justify-center" id="phoneDiv">
+                  <div class="w-8">
+                     <img th:src="@{/images/phone-icon.png}" />
+                  </div>
+                  <div class="w-4/5 px-2">
+                     <input type="number" id="phone" name="phone"
+                        class="block w-full rounded-2xl border-0 py-1.5 text-gray-500 font-bold text-sm shadow-sm ring-1 ring-inset ring-gray-300 placeholder:font-bold placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        placeholder="Phone">
+                  </div>
+                  <div class="w-8">
+                  </div>
+               </div>
+               
+               <!-- Phone Label -->
+               <div class="flex mt-3 justify-center" id="phoneLabelDiv">
+                  <div class="w-8"></div>
+                  <div class="w-4/5 px-2">
+                     <select id="phoneLabel" name="phoneLabel"
+                        class="block w-1/2 rounded-2xl border-0 py-1.5  shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 text-gray-500 font-bold text-sm">
+                        <option class="text-gray-500 font-bold" value="No Label">No Label</option>
+                        <option class="text-gray-500 font-bold" value="Mobile" selected>Mobile</option>
+                        <option class="text-gray-500 font-bold" value="Work">Work</option>
+                        <option class="text-gray-500 font-bold" value="Home">Home</option>
+                        <option class="text-gray-500 font-bold" value="Main">Main</option>
+                        <option class="text-gray-500 font-bold" value="Work Fax">Work Fax</option>
+                        <option class="text-gray-500 font-bold" value="Home Fax">Home Fax</option>
+                        <option class="text-gray-500 font-bold" value="Pager">Pager</option>
+                        <option class="text-gray-500 font-bold" value="Other">Other</option>
+                        <option class="text-gray-500 font-bold" value="Custom">Custom</option>
+                     </select>
+                  </div>
+                  <div class="w-8"></div>
+               </div>
+               
+               <!--Custom Phone Label-->
+               <div class="modal" id="customPhoneLabelModal">
+                  <div class="modal-content m-auto">
+                     <div class="flex justify-center">
+                        <div class="w-8">
+                           <img id="closeCustomPhoneLabelModal" th:src="@{/images/cross-icon.png}" style="cursor: pointer;">
+                        </div>
+                        <div class="w-4/5 px-2">
+                           <input type="text" id="customPhoneLabel"
+                              class="block w-full rounded-2xl border-0 py-1.5 text-gray-500 font-bold text-sm shadow-sm ring-1 ring-inset ring-gray-300 placeholder:font-bold placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                              placeholder="Custom Label">
+                        </div>
+                        <div class="w-8">
+                           <img id="saveCustomPhoneLabelModal" th:src="@{/images/check-icon.png}" style="cursor: pointer;">
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               
+               <!-- Email -->
+               <div class="flex mt-3 justify-center" id="emailDiv">
+                  <div class="w-8">
+                     <img th:src="@{/images/email-icon.png}" />
+                  </div>
+                  <div class="w-4/5 px-2">
+                     <input type="text" id="email" name="email"
+                        class="block w-full rounded-2xl border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:font-bold placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        placeholder="Email">
+                  </div>
+                  <div class="w-8">
+                  </div>
+               </div>
+               
+               <!-- Email Label -->
+               <div class="flex mt-3 justify-center" id="emailLabelDiv">
+                  <div class="w-8"></div>
+                  <div class="w-4/5 px-2">
+                     <select id="emailLabel" name="emailLabel"
+                        class="block w-1/2 rounded-2xl border-0 py-1.5  shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 text-gray-500 font-bold text-sm">
+                        <option class="text-gray-500 font-bold" value="No Label">No Label</option>
+                        <option class="text-gray-500 font-bold" value="Home" selected>Home</option>
+                        <option class="text-gray-500 font-bold" value="Work">Work</option>
+                        <option class="text-gray-500 font-bold" value="Other">Other</option>
+                        <option class="text-gray-500 font-bold" value="Custom">Custom</option>
+                     </select>
+                  </div>
+                  <div class="w-8"></div>
+               </div>
+               
+               <!--Custom Email Label-->
+               <div class="modal" id="customEmailLabelModal">
+                  <div class="modal-content m-auto">
+                     <div class="flex justify-center">
+                        <div class="w-8">
+                           <img id="closeCustomEmailLabelModal" th:src="@{/images/cross-icon.png}" style="cursor: pointer;">
+                        </div>
+                        <div class="w-4/5 px-2">
+                           <input type="text" id="customEmailLabel"
+                              class="block w-full rounded-2xl border-0 py-1.5 text-gray-500 font-bold text-sm shadow-sm ring-1 ring-inset ring-gray-300 placeholder:font-bold placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                              placeholder="Custom Label">
+                        </div>
+                        <div class="w-8">
+                           <img id="saveCustomEmailLabelModal" th:src="@{/images/check-icon.png}" style="cursor: pointer;">
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               
+               <!-- Address -->
+               <div class="flex mt-3 justify-center" id="addressDiv">
+                  <div class="w-8">
+                     <img th:src="@{/images/address-icon.png}" />
+                  </div>
+                  <div class="w-4/5 px-2">
+                     <input type="text" id="address" name="address"
+                        class="block w-full rounded-2xl border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:font-bold placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        placeholder="Address">
+                  </div>
+                  <div class="w-8">
+                  </div>
+               </div>
+               
+               <!-- Address Label -->
+               <div class="flex mt-3 justify-center" id="addressLabelDiv">
+                  <div class="w-8"></div>
+                  <div class="w-4/5 px-2">
+                     <select id="addressLabel" name="addressLabel"
+                        class="block w-1/2 rounded-2xl border-0 py-1.5  shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 text-gray-500 font-bold text-sm">
+                        <option class="text-gray-500 font-bold" value="No Label">No Label</option>
+                        <option class="text-gray-500 font-bold" value="Home" selected>Home</option>
+                        <option class="text-gray-500 font-bold" value="Work" >Work</option>
+                        <option class="text-gray-500 font-bold" value="Other" >Other</option>
+                        <option class="text-gray-500 font-bold" value="Custom">Custom</option>
+                     </select>
+                  </div>
+                  <div class="w-8"></div>
+               </div>
+               
+               <!--Custom Address Label-->
+               <div class="modal" id="customAddressLabelModal">
+                  <div class="modal-content m-auto">
+                     <div class="flex justify-center">
+                        <div class="w-8">
+                           <img id="closeCustomAddressLabelModal" th:src="@{/images/cross-icon.png}" style="cursor: pointer;">
+                        </div>
+                        <div class="w-4/5 px-2">
+                           <input type="text" id="customAddressLabel"
+                              class="block w-full rounded-2xl border-0 py-1.5 text-gray-500 font-bold text-sm shadow-sm ring-1 ring-inset ring-gray-300 placeholder:font-bold placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                              placeholder="Custom Label">
+                        </div>
+                        <div class="w-8">
+                           <img id="saveCustomAddressLabelModal" th:src="@{/images/check-icon.png}" style="cursor: pointer;">
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               
+               <!-- Website -->
+               <div class="flex mt-3 justify-center" id="websiteDiv">
+                  <div class="w-8">
+                     <img th:src="@{/images/link-icon.png}" />
+                  </div>
+                  <div class="w-4/5 px-2">
+                     <input type="text" id="website" name="website"
+                        class="block w-full rounded-2xl border-0 py-1.5 text-gray-500 font-bold text-sm shadow-sm ring-1 ring-inset ring-gray-300 placeholder:font-bold placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        placeholder="Website">
+                  </div>
+                  <div class="w-8">
+                  </div>
+               </div>
+               
+               <!-- Significant Date -->
+               <div class="flex mt-3 justify-center" id="significantDateDiv">
+                  <div class="w-8">
+                     <img th:src="@{/images/calendar-icon.png}" />
+                  </div>
+                  <div class="w-4/5 px-2">
+                     <input id="significantDate" name="significantDate"
+                        class="block w-full rounded-2xl border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:font-bold placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        placeholder="Significant Date" onfocus="(this.type='date')" onblur="(this.type='text')">
+                  </div>
+                  <div class="w-8">
+                  </div>
+               </div>
+               
+               <!-- Significant Date Label -->
+               <div class="flex mt-3 justify-center" id="significantDateLabelDiv">
+                  <div class="w-8"></div>
+                  <div class="w-4/5 px-2">
+                     <select id="significantDateLabel" name="significantDateLabel"
+                        class="block w-1/2 rounded-2xl border-0 py-1.5  shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 text-gray-500 font-bold text-sm">
+                        <option class="text-gray-500 font-bold" value="No Label">No Label</option>
+                        <option class="text-gray-500 font-bold" value="Birthday" selected>Birthday</option>
+                        <option class="text-gray-500 font-bold" value="Anniversary">Anniversary</option>
+                        <option class="text-gray-500 font-bold" value="Other">Other</option>
+                        <option class="text-gray-500 font-bold" value="Custom">Custom</option>
+                     </select>
+                  </div>
+                  <div class="w-8"></div>
+               </div>
+               
+               <!--Custom Significant Date Label-->
+               <div class="modal" id="customSignificantDateLabelModal">
+                  <div class="modal-content m-auto">
+                     <div class="flex justify-center">
+                        <div class="w-8">
+                           <img id="closeCustomSignificantDateLabelModal" th:src="@{/images/cross-icon.png}" style="cursor: pointer;">
+                        </div>
+                        <div class="w-4/5 px-2">
+                           <input type="text" id="customSignificantDateLabel"
+                              class="block w-full rounded-2xl border-0 py-1.5 text-gray-500 font-bold text-sm shadow-sm ring-1 ring-inset ring-gray-300 placeholder:font-bold placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                              placeholder="Custom Label">
+                        </div>
+                        <div class="w-8">
+                           <img id="saveCustomSignificantDateLabelModal" th:src="@{/images/check-icon.png}" style="cursor: pointer;">
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               
+               <!-- Related Person -->
+               <div class="flex mt-3 justify-center" id="relatedPersonDiv">
+                  <div class="w-8">
+                     <img th:src="@{/images/related-person-icon.png}" />
+                  </div>
+                  <div class="w-4/5 px-2">
+                     <input id="relatedPerson" name="relatedPerson"
+                        class="block w-full rounded-2xl border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:font-bold placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        placeholder="Related Person">
+                  </div>
+                  <div class="w-8">
+                  </div>
+               </div>
+               
+               <!-- Related Person Label -->
+               <div class="flex mt-3 justify-center" id="relatedPersonLabelDiv">
+                  <div class="w-8"></div>
+                  <div class="w-4/5 px-2">
+                     <select id="relatedPersonLabel" name="relatedPersonLabel"
+                        class="block w-1/2 rounded-2xl border-0 py-1.5  shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 text-gray-500 font-bold text-sm">
+                        <option class="text-gray-500 font-bold" value="No Label">No Label</option>
+                        <option class="text-gray-500 font-bold" value="Assistant" selected>Assistant</option>
+                        <option class="text-gray-500 font-bold" value="Brother">Brother</option>
+                        <option class="text-gray-500 font-bold" value="Child">Child</option>
+                        <option class="text-gray-500 font-bold" value="Partner">Partner</option>
+                        <option class="text-gray-500 font-bold" value="Father">Father</option>
+                        <option class="text-gray-500 font-bold" value="Friend">Friend</option>
+                        <option class="text-gray-500 font-bold" value="Manager">Manager</option>
+                        <option class="text-gray-500 font-bold" value="Mother">Mother</option>
+                        <option class="text-gray-500 font-bold" value="Parent">Parent</option>
+                        <option class="text-gray-500 font-bold" value="Business Partner">Business Partner</option>
+                        <option class="text-gray-500 font-bold" value="Referred By">Referred By</option>
+                        <option class="text-gray-500 font-bold" value="Relative">Relative</option>
+                        <option class="text-gray-500 font-bold" value="Sister">Sister</option>
+                        <option class="text-gray-500 font-bold" value="Spouse">Spouse</option>
+                        <option class="text-gray-500 font-bold" value="Custom">Custom</option>
+                     </select>
+                  </div>
+                  <div class="w-8"></div>
+               </div>
+               
+               <!--Custom Related Person Label-->
+               <div class="modal" id="customRelatedPersonLabelModal">
+                  <div class="modal-content m-auto">
+                     <div class="flex justify-center">
+                        <div class="w-8">
+                           <img id="closeCustomRelatedPersonLabelModal" th:src="@{/images/cross-icon.png}" style="cursor: pointer;">
+                        </div>
+                        <div class="w-4/5 px-2">
+                           <input type="text" id="customRelatedPersonLabel"
+                              class="block w-full rounded-2xl border-0 py-1.5 text-gray-500 font-bold text-sm shadow-sm ring-1 ring-inset ring-gray-300 placeholder:font-bold placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                              placeholder="Custom Label">
+                        </div>
+                        <div class="w-8">
+                           <img id="saveCustomRelatedPersonLabelModal" th:src="@{/images/check-icon.png}" style="cursor: pointer;">
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               
+               <!-- SIP-->
+               <div class="flex mt-3 justify-center" id="sipDiv">
+                  <div class="w-8">
+                     <img th:src="@{/images/sip-icon.png}" />
+                  </div>
+                  <div class="w-4/5 px-2">
+                     <input type="number" id="sip" name="sip"
+                        class="block w-full rounded-2xl border-0 py-1.5 text-gray-500 font-bold text-sm shadow-sm ring-1 ring-inset ring-gray-300 placeholder:font-bold placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        placeholder="SIP">
+                  </div>
+                  <div class="w-8">
+                  </div>
+               </div>
+               
+               <!-- Notes -->
+               <div class="flex mt-3 justify-center" id="notesDiv">
+                  <div class="w-8">
+                     <img th:src="@{/images/notes-icon.png}" />
+                  </div>
+                  <div class="w-4/5 px-2">
+                     <input type="text" id="notes" name="notes"
+                        class="block w-full rounded-2xl border-0 py-1.5 text-gray-500 font-bold text-sm shadow-sm ring-1 ring-inset ring-gray-300 placeholder:font-bold placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        placeholder="Notes">
+                  </div>
+                  <div class="w-8">
+                  </div>
+               </div>
+               
+               <!--Custom Fields-->
+               <div id="customFields">
+				   
+                  <!-- Custom Field 1-->
+                  <div class="flex mt-3 justify-center" id="customFieldDiv1">
+                     <div class="w-8">
+                        <img th:src="@{/images/custom-field-icon.png}" />
+                     </div>
+                     <div class="w-4/5 px-2">
+                        <input type="text" id="customField1" name="customField1" class="block w-full rounded-2xl border-0 py-1.5 text-gray-500 font-bold text-sm shadow-sm ring-1 ring-inset ring-gray-300 placeholder:font-bold placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Custom Field">
+                     </div>
+                     <div class="w-8">                     
+                     </div>
+                  </div>
+                  
+                  <!-- Custom Field Label 1-->
+                  <div class="flex mt-3 justify-center" id="customFieldLabelDiv1">
+                     <div class="w-8">
+                     </div>
+                     <div class="w-4/5 px-2">
+                        <input type="text" id="customFieldLabel1" name="customFieldLabel1" class="block w-full rounded-2xl border-0 py-1.5 text-gray-500 font-bold text-sm shadow-sm ring-1 ring-inset ring-gray-300 placeholder:font-bold placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Custom Label">
+                     </div>
+                     <div class="w-8">                     
+                     </div>
+                  </div>
+               </div>
+               
+               <!--Buttons-->
+               <div class="flex mt-10 w-4/5 mx-auto justify-end border-t-2 border-gray-400">
+                  <div class="p-2" id="moreFieldsDiv">
+                     <button id="addMoreFields" type="button" class="select-image rounded-2xl px-3 py-2 text-sm font-bold text-white shadow-sm bg-gray-500">More Fields</button>
+                  </div>
+                  <div class="p-2" id="addCustomFieldDiv">
+                     <button id="addCustomField" type="button" class="select-image rounded-2xl px-3 py-2 text-sm font-bold text-white shadow-sm bg-gray-500">Add Custom Field</button>
+                  </div>
+                  <div class="p-2">
+                     <button type="submit"
+                        class="rounded-2xl px-3 py-2 text-sm font-semibold text-white shadow-sm bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90%">Submit</button>
+                  </div>
+               </div>
+            </form>
+         </div>
+      </section>
+   </body>
+</html>

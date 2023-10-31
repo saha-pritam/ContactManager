@@ -29,4 +29,9 @@ public class AuthenticatedGeneral {
 	public String showContacts() {
 		return "showContacts";
 	}
+	
+	@GetMapping("/createContact")
+	public String createContact() {
+		return "createContact";
+	}
 }
