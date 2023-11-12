@@ -528,7 +528,10 @@
                   </div>
                   <div class="p-2">
                      <button type="submit"
-                        class="rounded-2xl px-3 py-2 text-sm font-semibold text-white shadow-sm bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90%">Submit</button>
+                        class="rounded-2xl px-3 py-2 text-sm font-semibold text-white shadow-sm bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90%">
+                        <div class="flex justify-center">
+							<div id="spinnerDiv" class="px-1"><img class="spinner" th:src="@{/images/spinner-icon.png}" /></div>
+							<div id="buttonTextDiv" class="px-1">Submit</div></div></button>
                   </div>
                </div>
             </form>

@@ -29,7 +29,7 @@ $(document).ready(function () {
    })
 
 
-   $("#addNewContactModal").show()
+   $("#spinnerDiv").hide()
 
    $("#namePrefixDiv").hide()
    $("#firstNameDiv").show() 
@@ -79,6 +79,79 @@ $(document).ready(function () {
 
    $(".customField").remove()
    $(".customFieldLabel").remove()
+   
+   	$("#newContactform").on('submit', function (e) {
+		e.preventDefault()
+		$("#spinnerDiv").show()
+		document.getElementById("buttonTextDiv").innerText="Saving"
+		let obj = {}
+		obj.namePrefix = $("input[name=namePrefix]").val()
+		obj.firstName = $("input[name=firstName]").val()
+		obj.middleName = $("input[name=middleName]").val()
+		obj.surname = $("input[name=surname]").val()
+		obj.nameSuffix = $("input[name=nameSuffix]").val()
+		obj.phoneticSurname = $("input[name=phoneticSurname]").val()
+		obj.phoneticMiddleName = $("input[name=phoneticMiddleName]").val()
+		obj.phoneticFirstName = $("input[name=phoneticFirstName]").val()
+		obj.nickname = $("input[name=nickname]").val()
+		obj.fileAs = $("input[name=fileAs]").val()
+		
+		obj.company = $("input[name=company]").val()
+		obj.department = $("input[name=department]").val()
+		obj.title = $("input[name=title]").val()
+		
+		obj.phone = $("input[name=phone]").val()
+		obj.phoneLabel = $("select[name=phoneLabel]").val()
+		
+		obj.email = $("input[name=email]").val()
+		obj.emailLabel = $("select[name=emailLabel]").val()
+		
+		obj.address = $("input[name=address]").val()
+		obj.addressLabel = $("select[name=addressLabel]").val()
+		
+		obj.website = $("input[name=website]").val()
+		
+		obj.significantDate = $("input[name=significantDate]").val()
+		obj.significantDateLabel = $("select[name=significantDateLabel]").val()
+		
+		obj.relatedPerson = $("input[name=relatedPerson]").val()
+		obj.relatedPersonLabel = $("select[name=relatedPersonLabel]").val()
+		
+		obj.sip = $("input[name=sip]").val()
+		
+		obj.notes = $("input[name=notes]").val()
+
+		while(customField>0){
+			obj[`customFieldLabel${customField}`]=$(`input[name=customFieldLabel${customField}]`).val()
+			obj[`customField${customField}`]=$(`input[name=customField${customField}]`).val()
+			customField-=1
+		}
+		
+		let jsonData = JSON.stringify(obj)
+		let myFile = document.getElementById("file")
+		let files = myFile.files;
+		let file = files[0];
+		let formData = new FormData();
+		formData.append('jsonData',jsonData)
+		if(file!==undefined){
+					formData.append('contactImage', file);
+				}
+		$.ajax({
+			url: "saveContact",
+            data:formData,
+            contentType: false,
+            processData: false,
+            type: 'post',
+            success: function (data, textStatus, jqXHR){
+				$("#spinnerDiv").hide()
+				document.getElementById("buttonTextDiv").innerText="Saved"
+				setTimeout(()=>{window.location.replace('showContacts')},2000)
+			},
+			error: function (jqXHR, textStatus, errorThrown) {
+				console.log('error')
+			}
+		})
+	})
 
    $("#upIcon").on('click', function () {
       $("#namePrefixDiv").hide()

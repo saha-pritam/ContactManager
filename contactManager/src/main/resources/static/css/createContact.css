@@ -111,3 +111,12 @@ input[type=number] {
 .img-area.active:hover::before {
 	opacity: 1;
 }
+
+.spinner {
+    animation: rotate 1s linear infinite;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg);   }
+    to   { transform: rotate(360deg); }
+}
